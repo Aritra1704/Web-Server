@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
 const app = express()
 
@@ -39,18 +41,69 @@ app.get('/help', (req, res) => {
     })
 })
 
-app.get('/weather', (req, res) => {
+app.get('/products', (req, res) => {
+    if(!req.query.search) {
+        return res.send({
+            error: 'You must provide a search term'
+        })
+    }
+    console.log(req.query)
     res.send({
-        location: {
-            latitude: 17.32456,
-            longitude: 78.235659
-        },
-        weather: {
-            temperature: 38,
-            rain: 30,
-            forecast: 'Sunny day'
-        }
+        products: []
     })
+})
+
+app.get('/weather', (req, res) => {
+    if(!req.query.address) {
+        return res.send({
+            error: 'You must provide an address'
+        })
+    }
+
+    const address = req.query.address
+    geocode(address, (error, {latitude, longitude, location} = {}) => {
+        if(error)
+            return res,send({
+                error: error
+            })
+        
+           console.log(latitude, longitude)
+           forecast(latitude, longitude, (error, {temperature, rain, summary} = {}) => {
+            if(error)
+                return res,send({
+                    error: error
+                })
+            
+            console.log(req.query.address)
+            console.log(location)
+            console.log('temperature: ' + temperature)
+            console.log('rain: ' + rain)
+            console.log('summary: ' + summary)
+
+            res.send({
+                coordinates: {latitude: latitude, longitude: longitude},
+                location,
+                forecast: {temperature, rain, summary}
+                // temperature: temperature,
+                // rain: rain,
+                // summary: summary
+            })
+        })
+        
+       
+    })
+    // res.send({
+    //     location: {
+    //         latitude: 17.32456,
+    //         longitude: 78.235659,
+    //         address: req.query.address
+    //     },
+    //     weather: {
+    //         temperature: 38,
+    //         rain: 30,
+    //         forecast: 'Sunny day'
+    //     }
+    // })
 })
 
 app.get('/help/*', (req, res) => {
