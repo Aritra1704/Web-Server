@@ -1,6 +1,0 @@
-node app.js
-nodemon app.js
-nodemon src/app.js -e js,hbs
-
-#heroku
-npm install -g heroku
