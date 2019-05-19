@@ -15,19 +15,16 @@
         } else if(body.error) {
             callback('Unable to find location', undefined)
         } else {
+            // console.log(body)
             const {currently, daily} = body
             callback(undefined, {
                 temperature: currently.temperature,
                 rain: currently.precipProbability,
-                summary: daily.data[0].summary
+                summary: daily.data[0].summary,
+                feellike: currently.apparentTemperature,
+                windSpeed: currently.windSpeed,
+                humidity: currently.humidity,
             })
-
-            // const body = response.body
-            // callback(undefined, {
-            //     temperature: body.currently.temperature,
-            //     rain: body.currently.precipProbability,
-            //     summary: body.daily.data[0].summary
-            // })
         }
      })
  }

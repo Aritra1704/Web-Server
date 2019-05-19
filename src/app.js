@@ -69,25 +69,22 @@ app.get('/weather', (req, res) => {
             })
         
            console.log(latitude, longitude)
-           forecast(latitude, longitude, (error, {temperature, rain, summary} = {}) => {
+           forecast(latitude, longitude, (error, {temperature, rain, summary, feellike, windSpeed, humidity} = {}) => {
             if(error)
                 return res,send({
                     error: error
                 })
             
-            console.log(req.query.address)
-            console.log(location)
-            console.log('temperature: ' + temperature)
-            console.log('rain: ' + rain)
-            console.log('summary: ' + summary)
+            // console.log(req.query.address)
+            // console.log(location)
+            // console.log('temperature: ' + temperature)
+            // console.log('rain: ' + rain)
+            // console.log('summary: ' + summary)
 
             res.send({
                 coordinates: {latitude: latitude, longitude: longitude},
                 location,
-                forecast: {temperature, rain, summary}
-                // temperature: temperature,
-                // rain: rain,
-                // summary: summary
+                forecast: {temperature, rain, summary, feellike, windSpeed, humidity}
             })
         })
         

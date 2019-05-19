@@ -15,7 +15,7 @@ const geocode = (address, callback) => {
         }  else if(body.features.length == 0) {
             callback('Unable to find location. Try another search', undefined)
         } else {
-            console.log('body >> ' + body.address)
+            // console.log('body >> ' + body.address)
             const {center} = body.features[0]
             callback(undefined, {
                 latitude: center[1],
