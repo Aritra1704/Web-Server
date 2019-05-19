@@ -24,6 +24,8 @@
                 feellike: currently.apparentTemperature,
                 windSpeed: currently.windSpeed,
                 humidity: currently.humidity,
+                temperatureHigh: daily.data[0].temperatureHigh,
+                temperatureLow: daily.data[0].temperatureLow,
             })
         }
      })

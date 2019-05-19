@@ -69,7 +69,7 @@ app.get('/weather', (req, res) => {
             })
         
            console.log(latitude, longitude)
-           forecast(latitude, longitude, (error, {temperature, rain, summary, feellike, windSpeed, humidity} = {}) => {
+           forecast(latitude, longitude, (error, {temperature, rain, summary, feellike, windSpeed, humidity, temperatureHigh, temperatureLow} = {}) => {
             if(error)
                 return res,send({
                     error: error
@@ -84,7 +84,7 @@ app.get('/weather', (req, res) => {
             res.send({
                 coordinates: {latitude: latitude, longitude: longitude},
                 location,
-                forecast: {temperature, rain, summary, feellike, windSpeed, humidity}
+                forecast: {temperature, rain, summary, feellike, windSpeed, humidity, temperatureHigh, temperatureLow}
             })
         })
         

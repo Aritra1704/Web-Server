@@ -30,8 +30,10 @@ weatherForm.addEventListener('submit', (e) => {
                 messageOne.textContent = 'You searched for ' + data.location
                                 
                 messageTwo.textContent =  'Temperature here is ' + fahToCel(data.forecast.temperature) + ' degrees Celsius ' + 
-                ' but feels like ' + fahToCel(data.forecast.feellike) + ' degrees Celsius.' + 
-                                ' The Windspeed is ' + data.forecast.windSpeed + 
+                                ' but feels like ' + fahToCel(data.forecast.feellike) + ' degrees Celsius.' + 
+                                ' Today\'s high is ' + fahToCel(data.forecast.temperatureHigh) + 
+                                ' and lowest is ' + fahToCel(data.forecast.temperatureLow) +
+                                '. The Windspeed is ' + data.forecast.windSpeed + 
                                 ' and humidity is ' + data.forecast.humidity + 
                                 ' over all summary\n' + data.forecast.summary
 
