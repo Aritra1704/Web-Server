@@ -6,3 +6,6 @@ nodemon src/app.js -e js,hbs
 npm install -g heroku
 heroku --version
 git push heroku master
+
+npm run start
+npm run dev
